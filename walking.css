@@ -1,0 +1,19 @@
+.walking_down
+{content: url("images/bot/walking1_down.png") !important;}
+.walking_down1
+{content: url("images/bot/walking2_down.png") !important;}
+
+.walking_right
+{content: url("images/bot/walking1_right.png") !important;}
+.walking_right1
+{content: url("images/bot/walking2_right.png") !important;}
+
+.walking_up
+{content: url("images/bot/walking1_up.png") !important;}
+.walking_up1
+{content: url("images/bot/walking2_up.png") !important;}
+
+.walking_left
+{content: url("images/bot/walking1_left.png") !important;}
+.walking_left1
+{content: url("images/bot/walking2_left.png") !important;}

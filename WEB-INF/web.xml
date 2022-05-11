@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+	<display-name>Lightbot</display-name>
+		<welcome-file-list>
+			<welcome-file>lightbot.jsp</welcome-file>
+		</welcome-file-list>
+<!--	<multipart-config>
+		<location>/tmp</location>
+		<max-file-size>20848820</max-file-size>
+		<max-request-size>418018841</max-request-size>
+		<file-size-threshold>1048576</file-size-threshold>
+	</multipart-config> -->
+
+	<servlet>
+		<servlet-name>LevelReader</servlet-name>
+		<servlet-class>lightbot.LevelReader</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LevelReader</servlet-name>
+		<url-pattern>/level-reader/*</url-pattern>
+	</servlet-mapping>
+
+<!--<servlet>
+		<servlet-name>JSONFileHandler</servlet-name>
+		<servlet-class>pepper_fresh.JSONFileHandler</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>JSONFileHandler</servlet-name>
+		<url-pattern>/json_file_handler/*</url-pattern>
+	</servlet-mapping> -->
+
+</web-app>
+
