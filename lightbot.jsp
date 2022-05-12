@@ -21,15 +21,21 @@
 
 
 	int level_number = 0;
+	String level = "";
 	try
-	{level_number = Integer.parseInt(request.getParameter("level"));}
+	{
+		level_number = Integer.parseInt(request.getParameter("level"));
+		level = levels[level_number];
+	}//try.
 	catch(NullPointerException | NumberFormatException nfe)
-	{}
+	{
+		if(request.getParameter("level")=="test")
+		{level="test";}
+	}
 
 	if(level_number>number_of_levels)
 	{level_number=0;}
 
-	String level = levels[level_number];
 	if(level==null || level.trim().isEmpty())
 	{level="test";}
 

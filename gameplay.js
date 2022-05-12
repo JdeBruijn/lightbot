@@ -126,9 +126,9 @@ function buildInstructionSet()
 	f1_instructions = extractInstructions("f1_instructions");
 	f2_instructions = extractInstructions("f2_instructions");
 
-	console.log("base_instructions="+JSON.stringify(base_instructions));//debug**
-	console.log("f1_instructions="+JSON.stringify(f1_instructions));//debug**
-	console.log("f2_instructions="+JSON.stringify(f2_instructions));//debug**
+	//console.log("base_instructions="+JSON.stringify(base_instructions));//debug**
+	//console.log("f1_instructions="+JSON.stringify(f1_instructions));//debug**
+	//console.log("f2_instructions="+JSON.stringify(f2_instructions));//debug**
 }//buildInstructionSet().
 
 function extractInstructions(parent_element_id)
@@ -146,15 +146,13 @@ function extractInstructions(parent_element_id)
 
 function compileInstructions(instruction_set)
 {
-//	console.log("compileInstructions():");//debug**
-//	console.log("instruction_set="+JSON.stringify(instruction_set));//debug**
-//	var offset=0;
-//	var commands = [];
+	//console.log("compileInstructions():");//debug**
+	//console.log("instruction_set="+JSON.stringify(instruction_set));//debug**
 	for(var i=0; i<instruction_set.length; i++)
 	{
 		var instruction=instruction_set[i];
-		console.log("command_index="+command_index);//debug**
-		console.log("instruction = "+instruction);//debug**
+		//console.log("command_index="+command_index);//debug**
+		//console.log("instruction = "+instruction);//debug**
 		if(instruction=="forward")
 		{all_commands[command_index]=forward;}
 		else if(instruction=="light")
@@ -167,21 +165,13 @@ function compileInstructions(instruction_set)
 		{all_commands[command_index]=jump;}
 		else if(instruction=="f1")
 		{
-			var function_commands = compileInstructions(f1_instructions,i);
-			if(function_commands==null)//something went wrong.
-			{return null;}
+			compileInstructions(f1_instructions);
 			continue;
-			//offset+=function_commands.length;
-			//commands = commands.concat(function_commands);
 		}//else if.
 		else if(instruction=="f2")
 		{
-			var function_commands = compileInstructions(f2_instructions,i);
-			if(function_commands==null)//something went wrong.
-			{return null;}
+			compileInstructions(f2_instructions);
 			continue;
-			//offset+=function_commands.length;
-			//commands = commands.concat(function_commands);
 		}//else if.
 		else
 		{
@@ -193,7 +183,7 @@ function compileInstructions(instruction_set)
 		{
 			compiled_instructions[command_index]=instruction;//debug**
 		}//if.
-		console.log("compiled_instructions = "+compiled_instructions);//debug**
+		//console.log("compiled_instructions = "+compiled_instructions);//debug**
 
 		command_index++;
 		//console.log("command_index="+command_index);//debug**
@@ -223,6 +213,7 @@ function forward()
 	};
 
 	setTargetCoordinates(target_block);
+	updateBotZIndex("forward", false);
 	updateBotIcon();
 	setTimeout(walkBot,bot_step_time);
 }//forward().
@@ -288,6 +279,7 @@ function jump()
 	};
 
 	setTargetCoordinates(target_block);
+	updateBotZIndex("jump", false);
 	updateBotIcon();
 	setTimeout(jumpBot,50);
 }//jump().
@@ -316,6 +308,33 @@ function getTargetBlock()
 	return block;
 }//getTargetBlock().
 
+function updateBotZIndex(action, force)
+{
+	console.log("updateBotZIndex():");//debug**
+	var block_row = bot_data.row;
+	var block_column = bot_data.column;
+
+	block_row=bot_data.row;
+	block_column=bot_data.column;	
+
+	var block = document.getElementById(block_row+"_"+block_column+"cell");
+
+	var target_height = Number(block.getAttribute("height"));
+	var block_zIndex = Number(block.getAttribute("zIndex"));
+
+	if(!force && block_zIndex<bot_data.zIndex && (target_height<=bot_data.height && action!="jump"))//Don't update zIndex until bot is actually on the block.
+	{
+		//do nothing.
+	}//if.
+	else
+	{
+		console.log("zIndex updated!");//debug**
+		bot_data.zIndex=block_zIndex;
+		bot.style.zIndex=bot_data.zIndex;
+	}//else.
+	bot_data.height=target_height;
+}//getCurrentBlock().
+
 function setTargetCoordinates(block)
 {
 	console.log("setTargetCoordinates():");//debug**
@@ -325,15 +344,10 @@ function setTargetCoordinates(block)
 	var target_height = Number(block.getAttribute("height"));
 	var block_row = Number(block.getAttribute("row"));
 	var block_column = Number(block.getAttribute("column"));
-	var block_zIndex = Number(block.getAttribute("zIndex"));
 	bot_data.target_top=block.offsetTop-(bot_height/bot_height_offset);//bot_height_offset defined in board_creation.js
 	bot_data.target_left=block.offsetLeft;
-	bot_data.zIndex=block_zIndex;
-	bot_data.height=target_height;
 	bot_data.row=block_row;//Update to destination index.
 	bot_data.column=block_column;//Update to destination index.
-
-	bot.style.zIndex=bot_data.zIndex;
 }//getTargetCoordinates().
 
 function walkBot()
@@ -368,7 +382,7 @@ function jumpBot()
 
 function moveBot()
 {
-	console.log("moveBot():");//debug**
+	//console.log("moveBot():");//debug**
 	var gradient = (bot_data.target_left-bot_data.left)/(bot_data.target_top-bot_data.top);
 	//console.log("bot_data.top="+bot_data.top+" bot_data.left="+bot_data.left);//debug**
 	//console.log("bot_data.target_top="+bot_data.target_top+" bot_data.target_left="+bot_data.target_left);//debug**
@@ -388,7 +402,7 @@ function moveBot()
 
 function hasReachedTarget()
 {
-	console.log("hasReachedTarget():");//debug**
+	//console.log("hasReachedTarget():");//debug**
 	var top_difference = bot_data.target_top-bot_data.top;
 	var left_difference = bot_data.target_left-bot_data.left;
 
@@ -401,7 +415,7 @@ function hasReachedTarget()
 	if(bot_data.direction==3 && left_difference>0)//left.
 	{return true;}
 	
-	console.log("\tfalse");//debug**
+	//console.log("\tfalse");//debug**
 	return false;
 }//hasReachedTarget().
 
@@ -432,6 +446,7 @@ function runNextCommand()
 	bot_data.action=0;
 	bot_data.current_walk=0;
 	updateBotIcon();
+	updateBotZIndex(true);
 	console.log("active_command_index="+active_command_index+" all_commands.length="+all_commands.length);//debug**
 	if(active_command_index>=all_commands.length)
 	{
