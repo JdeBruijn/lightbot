@@ -25,21 +25,21 @@
 	try
 	{
 		level_number = Integer.parseInt(request.getParameter("level"));
-		level = levels[level_number];
+		log.info(class_name+" level_number = "+level_number);//debug**
 	}//try.
 	catch(NullPointerException | NumberFormatException nfe)
-	{
-		if(request.getParameter("level").equals("test"))
-		{level="test";}
-		else
-		{level="";}
-	}//catch().
+	{level_number=0;}//catch().
 
 	if(level_number>number_of_levels)
 	{level_number=0;}
 
-	if(level==null || level.trim().isEmpty())
+	if(level_number==-1)
 	{level="test";}
+	else
+	{level = levels[level_number];}
+
+	log.info(class_name+" level_number = "+level_number);//debug**
+	log.info(class_name+" level = "+level);//debug**
 
 %>
 
