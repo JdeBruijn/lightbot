@@ -29,9 +29,11 @@
 	}//try.
 	catch(NullPointerException | NumberFormatException nfe)
 	{
-		if(request.getParameter("level")=="test")
+		if(request.getParameter("level").equals("test"))
 		{level="test";}
-	}
+		else
+		{level="";}
+	}//catch().
 
 	if(level_number>number_of_levels)
 	{level_number=0;}
