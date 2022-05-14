@@ -102,7 +102,7 @@
 				<div class="instruction_cell" ondrop="dropActionOption(event)" ondragover="allowDrop(event)"></div>
 			</div>
 		</div>
-		<div class="instructions_grid_heading">F1</div>
+		<div class="instructions_grid_heading">P1</div>
 		<div id="f1_instructions" class="instructions_grid">
 			<div class="instructions_row">
 				<div class="instruction_cell" ondrop="dropActionOption(event)" ondragover="allowDrop(event)"></div>
@@ -117,7 +117,7 @@
 				<div class="instruction_cell" ondrop="dropActionOption(event)" ondragover="allowDrop(event)"></div>
 			</div>
 		</div>
-		<div class="instructions_grid_heading">F2</div>
+		<div class="instructions_grid_heading">P2</div>
 		<div id="f2_instructions" class="instructions_grid">
 			<div class="instructions_row">
 				<div class="instruction_cell" ondrop="dropActionOption(event)" ondragover="allowDrop(event)"></div>
