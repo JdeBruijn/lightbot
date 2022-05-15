@@ -470,7 +470,7 @@ function runNextCommand()
 	var previous_command = all_commands[active_command_index-1];
 	if(active_command!=previous_command)//improve smoothness of actions.
 	{
-		console.log("commands are different");//debug**
+		//console.log("commands are different");//debug**
 		bot_data.action=0;
 		bot_data.current_walk=0;
 		updateBotIcon();
