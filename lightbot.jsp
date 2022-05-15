@@ -46,6 +46,32 @@
 <head>
 	<link rel="stylesheet" href="lightbot.css">
 	<link rel="stylesheet" href="walking.css">
+
+	<link rel="preload" as="image" href="images/bot/crouched_down.png">
+	<link rel="preload" as="image" href="images/bot/crouched_up.png">
+	<link rel="preload" as="image" href="images/bot/jumping_right.png">
+	<link rel="preload" as="image" href="images/bot/lit_left.png">
+	<link rel="preload" as="image" href="images/bot/standing_down.png">
+	<link rel="preload" as="image" href="images/bot/standing_up.png">
+	<link rel="preload" as="image" href="images/bot/walking_left1.png">
+	<link rel="preload" as="image" href="images/bot/walking_right2.png">
+	<link rel="preload" as="image" href="images/bot/crouched_left.png">
+	<link rel="preload" as="image" href="images/bot/jumping_down.png">
+	<link rel="preload" as="image" href="images/bot/jumping_up.png">
+	<link rel="preload" as="image" href="images/bot/lit_right.png">
+	<link rel="preload" as="image" href="images/bot/standing_left.png">
+	<link rel="preload" as="image" href="images/bot/walking_down1.png">
+	<link rel="preload" as="image" href="images/bot/walking_left2.png">
+	<link rel="preload" as="image" href="images/bot/walking_up1.png">
+	<link rel="preload" as="image" href="images/bot/crouched_right.png">
+	<link rel="preload" as="image" href="images/bot/jumping_left.png">
+	<link rel="preload" as="image" href="images/bot/lit_down.png">
+	<link rel="preload" as="image" href="images/bot/lit_up.png">
+	<link rel="preload" as="image" href="images/bot/standing_right.png">
+	<link rel="preload" as="image" href="images/bot/walking_down2.png">
+	<link rel="preload" as="image" href="images/bot/walking_right1.png">
+	<link rel="preload" as="image" href="images/bot/walking_up2.png">
+
 	<script src="board_creation.js"></script>
 	<script src="lightbot.js"></script>
 	<script src="fetch_wrapper.js"></script>
