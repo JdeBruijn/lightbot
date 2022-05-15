@@ -367,8 +367,8 @@ function walkBot()
 	if(hasReachedTarget())
 	{
 		updateBotZIndex("",true);
-		bot_data.action=0;
-		updateBotIcon();
+		//bot_data.action=0;
+		//updateBotIcon();
 		runNextCommand();
 		return;
 	}//if.
@@ -458,9 +458,6 @@ function runNextCommand()
 	console.log("runNextCommand():");//debug**
 	if(all_commands.length<=0)//game has been reset.
 	{return;}
-	bot_data.action=0;
-	bot_data.current_walk=0;
-	updateBotIcon();
 	updateBotZIndex("",true);
 	console.log("active_command_index="+active_command_index+" all_commands.length="+all_commands.length);//debug**
 	if(active_command_index>=all_commands.length)
@@ -470,6 +467,14 @@ function runNextCommand()
 		return;
 	}//if.
 	var active_command = all_commands[active_command_index];
+	var previous_command = all_commands[active_command_index-1];
+	if(active_command!=previous_command)//improve smoothness of actions.
+	{
+		console.log("commands are different");//debug**
+		bot_data.action=0;
+		bot_data.current_walk=0;
+		updateBotIcon();
+	}//if.
 	//console.log(" active_command = "+all_commands[active_command_index]);//debug**
 	active_command_index++;
 	if(active_command!=null)
