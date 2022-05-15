@@ -256,7 +256,7 @@ function light()
 	{
 		bot_data.action=0;//set back to standing.
 		updateBotIcon();
-		runNextCommand();
+		setTimeout(runNextCommand,100);
 	}//if.
 	else
 	{
@@ -265,7 +265,7 @@ function light()
 		{target_block.classList.toggle("lit");}
 		bot_data.action=3;
 		updateBotIcon();
-		setTimeout(light, 200);//call this method again to make it stand up again.
+		setTimeout(light, 300);//call this method again to make it stand up again.
 	}//else.
 }//light().
 
@@ -385,7 +385,7 @@ function jumpBot()
 		updateBotZIndex("",true);
 		bot_data.action=0;
 		updateBotIcon();
-		runNextCommand();
+		setTimeout(runNextCommand,100);
 		return;
 	}//if.
 
