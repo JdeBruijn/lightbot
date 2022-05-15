@@ -1,7 +1,7 @@
 var block_images_path = "images/";
 var bot_images_path = "images/bot/";
 
-var bot_step_size=1;//pixels moved per step.
+var bot_step_size=2;//pixels moved per step.
 var bot_step_time=50;//milliseconds between steps.
 
 
@@ -324,12 +324,9 @@ function getTargetBlock()
 
 function updateBotZIndex(action, force)
 {
-	console.log("updateBotZIndex():");//debug**
+	//console.log("updateBotZIndex():");//debug**
 	var block_row = bot_data.row;
 	var block_column = bot_data.column;
-
-	block_row=bot_data.row;
-	block_column=bot_data.column;	
 
 	var block = document.getElementById(block_row+"_"+block_column+"cell");
 
@@ -347,7 +344,7 @@ function updateBotZIndex(action, force)
 		bot.style.zIndex=bot_data.zIndex;
 	}//else.
 	bot_data.height=target_height;
-}//getCurrentBlock().
+}//updateBotZIndex().
 
 function setTargetCoordinates(block)
 {
@@ -366,9 +363,10 @@ function setTargetCoordinates(block)
 
 function walkBot()
 {
-	console.log("walkBot()...");//debug**
+	//console.log("walkBot()...");//debug**
 	if(hasReachedTarget())
 	{
+		updateBotZIndex("",true);
 		bot_data.action=0;
 		updateBotIcon();
 		runNextCommand();
@@ -384,6 +382,7 @@ function jumpBot()
 {
 	if(hasReachedTarget())
 	{
+		updateBotZIndex("",true);
 		bot_data.action=0;
 		updateBotIcon();
 		runNextCommand();
@@ -396,17 +395,17 @@ function jumpBot()
 
 function moveBot()
 {
+	if(all_commands.length<=0)//game has been reset.
+	{return;}
 	//console.log("moveBot():");//debug**
-	var gradient = (bot_data.target_left-bot_data.left)/(bot_data.target_top-bot_data.top);
-	//console.log("bot_data.top="+bot_data.top+" bot_data.left="+bot_data.left);//debug**
-	//console.log("bot_data.target_top="+bot_data.target_top+" bot_data.target_left="+bot_data.target_left);//debug**
-	//console.log("gradient="+gradient);//debug**
-	var y_change = bot_step_size;
-	if(bot_data.direction==2 || bot_data.direction==3)//up or left.
-	{y_change=-bot_step_size;}
+	var gradient = (bot_data.target_top-bot_data.top)/(bot_data.target_left-bot_data.left);
 
-	var x_change=y_change*gradient;
-	//console.log();//debug**
+	var x_change = Math.sqrt((Math.pow(bot_step_size,2))/(Math.pow(gradient,2)+1));
+	if(bot_data.direction==0 || bot_data.direction==3)//down or left.
+	{x_change=-x_change;}
+
+	var y_change=x_change*gradient;
+	//console.log("moveBot(): x_change="+x_change+" y_change="+y_change);//debug**
 
 	bot_data.top=bot_data.top+y_change;
 	bot_data.left=bot_data.left+x_change;
@@ -457,10 +456,12 @@ function updateBotIcon()
 function runNextCommand()
 {
 	console.log("runNextCommand():");//debug**
+	if(all_commands.length<=0)//game has been reset.
+	{return;}
 	bot_data.action=0;
 	bot_data.current_walk=0;
 	updateBotIcon();
-	updateBotZIndex(true);
+	updateBotZIndex("",true);
 	console.log("active_command_index="+active_command_index+" all_commands.length="+all_commands.length);//debug**
 	if(active_command_index>=all_commands.length)
 	{
@@ -510,7 +511,7 @@ function levelComplete()
 	document.body.appendChild(background);
 
 	var game_complete=false;
-	if(level_number>=number_of_levels)//these variables defined in .jsp file.
+	if(level_number>=(number_of_levels-1))//these variables defined in .jsp file.
 	{game_complete=true;}
 
 	var top_margin = window.innerHeight*0.1;//10%

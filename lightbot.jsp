@@ -30,7 +30,7 @@
 	catch(NullPointerException | NumberFormatException nfe)
 	{level_number=0;}//catch().
 
-	if(level_number>number_of_levels)
+	if(level_number>=number_of_levels)
 	{level_number=0;}
 
 	if(level_number==-1)
