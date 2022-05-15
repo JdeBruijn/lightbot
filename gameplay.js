@@ -202,13 +202,20 @@ function forward()
 	console.log("forward()...");//debug**
 	bot_data.action=2;//walking.
 	var target_block = getTargetBlock();
+	if(target_block==null)
+	{
+		bot_data.action=0;//set bot back to standing.
+		updateBotIcon();
+		setTimeout(runNextCommand,200);
+		return;
+	}//if.
 	var target_height = Number(target_block.getAttribute("height"));
 	//console.log("target_height="+target_height+" bot_height="+bot_data.height);//debug**
 	if(Math.abs(target_height-bot_data.height)>0)//Target block must be the same height.
 	{
 		bot_data.action=0;//set bot back to standing.
 		updateBotIcon();
-		setTimeout(runNextCommand,300);
+		setTimeout(runNextCommand,200);
 		return;
 	};
 
@@ -267,6 +274,13 @@ function jump()
 	console.log("jump");//debug**	
 	bot_data.action=1;
 	var target_block = getTargetBlock();
+	if(target_block==null)
+	{
+		bot_data.action=0;//set bot back to standing.
+		updateBotIcon();
+		setTimeout(runNextCommand,200);
+		return;
+	}//if.
 	var target_height = Number(target_block.getAttribute("height"));
 	console.log("target_height="+target_height+" bot height="+bot_data.height);//debug**
 	//if(Math.abs(target_height-bot_data.height)>1)//Can't jump more than 1 block.
